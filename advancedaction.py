@@ -21,6 +21,7 @@ class AdvancedAction(ActionCore):
         super().__init__(*args, **kwargs)
 
         self._state = 0
+        self._message = "none set"
 
         # Register for icon change events
         self.icon_keys = ["main"]
@@ -107,8 +108,11 @@ class AdvancedAction(ActionCore):
 
         log.info(
             f"Advanced Action received callback event from plugin backend! args: {args} kwargs: {kwargs}")
+        log.info(f"Saved message value: {self.message_row.get_value()}") # Retrieve message directly from the entry row
+        log.info(f"Use message: {self._message}") # Retrieve message from internal variable
 
     def _on_text_change(self, widget: Gtk.Widget, new_value: str, old_value: str):
         """Handle text change in the entry row."""
         log.info(f"Chat message text changed to: {widget.get_text()}")
         log.info(f"New value: {new_value}, Old value: {old_value}")
+        self._message = new_value
