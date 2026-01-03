@@ -26,7 +26,7 @@ class AdvancedAction(ActionCore):
         self.plugin_base.asset_manager.icons.add_listener(self._icon_changed)
 
         # Add event assigner for pressing the button
-        self.event_manager.add_event_assigner(
+        self.add_event_assigner(
             EventAssigner(
                 id="advanced-action",  # Unique ID for the event
                 ui_label="Trigger Event",  # Label shown in the UI, must match the locales.csv
@@ -47,6 +47,18 @@ class AdvancedAction(ActionCore):
             event_id="com_imdevinc_StreamControllerSamplePlugin::AdvancedEvent",
             callback=self._on_callback_event
         )
+
+    def on_remove(self):
+        """Called when the action is being removed.
+        NOTE: This doesn't work currently, need to research why
+        """
+        super().on_remove()
+        log.debug("Unsubscribing from advanced event from plugin backend")
+        self.plugin_base.disconnect_from_event(
+            event_id="com_imdevinc_StreamControllerSamplePlugin::AdvancedEvent",
+            callback=self._on_callback_event
+        )
+
 
     def _icon_changed(self, event: str, key: str, asset: Icon):
         """Handle icon change events from the asset manager."""
