@@ -1,0 +1,15 @@
+{
+  "version": "0.0.1",
+  "thumbnail": "store/thumbnail.png",
+  "id": "com_imdevinc_StreamControllerSamplePlugin",
+  "name": "Sample Plugin",
+  "author": "ImDevinC",
+  "github": "https://github.com/ImDevinC/StreamControllerSamplePlugin",
+  "tags": [
+    "developer"
+  ],
+  "minimum-app-version": "1.5.0-beta.13",
+  "app-version": "1.5.0-beta.13",
+  "description": "A sample plugin for StreamController that showcases how to do simple things",
+  "short-description": "Sample plugin"
+}

@@ -1,0 +1,6 @@
+autopep8==2.3.2
+loguru==0.7.3
+plumbum==1.10.0
+pycodestyle==2.14.0
+rpyc==6.0.2
+streamcontroller-plugin-tools==2.0.2
