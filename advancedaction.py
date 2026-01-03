@@ -9,6 +9,9 @@ from src.backend.PluginManager.PluginSettings.Asset import Icon
 from src.backend.PluginManager.EventAssigner import EventAssigner
 from src.backend.PluginManager.InputBases import Input
 
+from GtkHelper.GenerativeUI.EntryRow import EntryRow
+
+
 from gi.repository import Gtk, Adw
 import gi
 
@@ -35,6 +38,20 @@ class AdvancedAction(ActionCore):
             )
         )
 
+        # Add an entry row for chat message text
+        self.message_row = EntryRow(
+            action_core=self,
+            var_name="chat.message_text",
+            default_value="",
+            title="chat-message-text",
+            on_change=self._on_text_change,
+            auto_add=False,
+            complex_var_name=True,
+        )
+
+    def get_config_rows(self):
+        """Return a list of configuration rows for the action settings UI."""
+        return [self.message_row.widget]
 
     def on_ready(self):
         """Called when the action is fully initialized and ready."""
@@ -90,3 +107,8 @@ class AdvancedAction(ActionCore):
 
         log.info(
             f"Advanced Action received callback event from plugin backend! args: {args} kwargs: {kwargs}")
+
+    def _on_text_change(self, widget: Gtk.Widget, new_value: str, old_value: str):
+        """Handle text change in the entry row."""
+        log.info(f"Chat message text changed to: {widget.get_text()}")
+        log.info(f"New value: {new_value}, Old value: {old_value}")
